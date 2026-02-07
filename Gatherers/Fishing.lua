@@ -1,7 +1,7 @@
 --[=====[
 [[SND Metadata]]
 author:  'reddywhp || Adapted from pot0to and Minnu'
-version: 0.9.7a
+version: 0.9.7b
 description: Fishing for various targets
 plugin_dependencies:
 - AutoHook
@@ -54,7 +54,7 @@ configs:
 --]=====]
 
 --[[
-            a   Updating path for Goldentail
+            b   Updating path for Goldentail
     -> 0.9.7    Added Goldentail
     -> 0.9.6    Wait for repair and materia extractions
                 Logging to find why it's not mounting
