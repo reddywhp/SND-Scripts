@@ -1,7 +1,7 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.1
+version: 0.1.1
 description: |
   Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
   -  Moves around from time to time.
@@ -10,7 +10,7 @@ description: |
 plugin_dependencies:
   - Lifestream
   - vnavmesh
-  - Autohook
+  - AutoHook
 configs:
     TargetAchievement:
         description: "What is your target achievement?"
@@ -74,6 +74,7 @@ configs:
 --]=====]
 
 --[[
+    -> 0.1.1    Typo
     -> 0.1.0    Initial adaptation
 
 ********************************************************************************
