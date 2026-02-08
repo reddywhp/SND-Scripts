@@ -1,7 +1,7 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.5.0
+version: 0.5.2
 description: |
   Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
   -  Moves around from time to time.
@@ -69,12 +69,18 @@ configs:
         default: 120
         min: 2
         max: 180
+    LoggingTimer:
+        description: "How many minutes between log entries"
+        default: 5
+        min: 1
+        max: 30
     
 [[End Metadata]]
 --]=====]
 
 --[[
-    -> 0.5.0    Basic functionality is working
+    -> 0.5.2    Added Timer reporting
+    -> 0.5.1    Basic functionality is working
     -> 0.1a     Typo
     -> 0.1.0    Initial adaptation
 
@@ -93,7 +99,7 @@ configs:
 import("System")
 import("System.Numerics")
 
-ScriptName="[Baiting Achievements]"
+ScriptName="Baiting Achievements"
 
 -------------------
 --    General    --
@@ -109,6 +115,7 @@ ResetHardAmissAfter    = Config.Get("ResetHardAmissAfter")
 Food                   = Config.Get("Food")
 Potion                 = Config.Get("Potion")
 MinInventoryFreeSlots  = Config.Get("MinInventoryFreeSlots")
+LoggingTimer           = Config.Get("LoggingTimer")
 
 --============================ CONSTANT ==========================--
 
@@ -808,6 +815,7 @@ function SelectNewFishingHole()
     SelectedFishingSpot.z = SelectedFish.fishingSpots.pointToFace.z
 
     SelectedFishingSpot.startTime = os.clock()
+    SelectedFishingSpot.timer = 0
     SelectedFishingSpot.lastStuckCheckPosition = { x = Player.Entity.Position.X, y = Player.Entity.Position.Y, z = Player.Entity.Position.Z }
 end
 
@@ -891,29 +899,6 @@ function CharacterState.gsFishSense()
     Dalamud.Log(string.format("[%s] State Changed → TeleportFishingZone", ScriptName))
 end
 
---[[ CharacterState.gsSelectAchievement ]]
-function gsSelectAchievement()
-    for _, TestAchievement in pairs(FishTable) do
-        if IsAchievementComplete(TestAchievement.AchievementNumber) then
-            LogInfo("["..ScriptName.."] Specific requested Achievement completed: "..Achievement.AchievementName)
-            StopFlag = true
-            return
-        elseif IsAchievementComplete(Achievement.AchievementNumber) and TargetAchievement == 0 then
-            if CurrentFishingSpot == #ARRFishingAchievements then
-                LogInfo("["..ScriptName.."] All achievements completed")
-                StopFlag = true
-                return
-            else 
-                CurrentFishingSpot = CurrentFishingSpot + 1
-                Achievement = ARRFishingAchievements[CurrentFishingSpot]
-                LogInfo("Selected Achievement: "..Achievement.AchievementName)
-                return
-            end
-        end
-    end
-end
-
-
 
 --[[ CharacterState.gsTeleportFishingZone ]]
 function CharacterState.gsTeleportFishingZone()
@@ -946,6 +931,7 @@ function CharacterState.gsGoToFishingHole()
             return
         end
         SelectedFishingSpot.startTime = now
+        SelectedFishingSpot.timer = 0
         local x = Player.Entity.Position.X
         local y = Player.Entity.Position.Y
         local z = Player.Entity.Position.Z
@@ -995,7 +981,7 @@ function CharacterState.gsGoToFishingHole()
     end
 
     State = CharacterState.gsFishing
-    Dalamud.Log(string.format("[%s] State Changed → Fishing", ScriptName))
+    Dalamud.Log(string.format("[%s] State Changed gsGoToFishingHole to gsFishing", ScriptName))
 end
 
 --[[ CharacterState.gsFishing ]]
@@ -1018,6 +1004,11 @@ function CharacterState.gsFishing()
         return
     end
 
+    if (os.clock() - SelectedFishingSpot.startTime) > (SelectedFishingSpot.timer * 60) then
+        Dalamud.Log(string.format("[%s] in current location for %s seconds", ScriptName, (os.clock() - SelectedFishingSpot.startTime)))
+        SelectedFishingSpot.timer = SelectedFishingSpot.timer + LoggingTimer
+    end
+    
     if os.clock() - ResetHardAmissTime > (ResetHardAmissAfter * 60) then
         if Svc.Condition[CharacterCondition.gathering] then
             if not Svc.Condition[CharacterCondition.fishing] then
@@ -1026,7 +1017,7 @@ function CharacterState.gsFishing()
             end
         else
             State = CharacterState.gsResetAmiss
-            Dalamud.Log(string.format("[%s] State Changed → Forced teleport away to avoid hard amiss", ScriptName))
+            Dalamud.Log(string.format("[%s] State Changed gsFishing -> gsResetAmiss, forced teleport away to avoid hard amiss", ScriptName))
         end
         return
     elseif os.clock() - SelectedFishingSpot.startTime > (MoveSpotsAfter * 60) then
@@ -1042,7 +1033,7 @@ function CharacterState.gsFishing()
         else
             SelectNewFishingHole()
             State = CharacterState.gsReady
-            Dalamud.Log(string.format("[%s] State Changed → Timeout Ready", ScriptName))
+            Dalamud.Log(string.format("[%s] State Changed gsFishing → gsReady, timeout ready", ScriptName))
         end
         return
     elseif Svc.Condition[CharacterCondition.gathering] then
