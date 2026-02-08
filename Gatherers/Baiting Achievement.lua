@@ -1,7 +1,7 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.1a
+version: 0.5.0
 description: |
   Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
   -  Moves around from time to time.
@@ -74,7 +74,8 @@ configs:
 --]=====]
 
 --[[
-    -> 0.1a    Typo
+    -> 0.5.0    Basic functionality is working
+    -> 0.1a     Typo
     -> 0.1.0    Initial adaptation
 
 ********************************************************************************
@@ -92,7 +93,7 @@ configs:
 import("System")
 import("System.Numerics")
 
-ScriptName="[AetherFishing]"
+ScriptName="[Baiting Achievements]"
 
 -------------------
 --    General    --
