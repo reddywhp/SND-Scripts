@@ -1,7 +1,7 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.5.2
+version: 0.5.3
 description: |
   Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
   -  Moves around from time to time.
@@ -79,6 +79,7 @@ configs:
 --]=====]
 
 --[[
+    -> 0.5.3    Fix fish sensing something amiss
     -> 0.5.2    Added Timer reporting
     -> 0.5.1    Basic functionality is working
     -> 0.1a     Typo
@@ -687,7 +688,7 @@ end
 --[[ OnChatMessage ]]
 function OnChatMessage()
     local message = TriggerData.message
-    local patternToMatch = "The fish sense something amiss. Perhaps it is time to try another location."
+    local patternToMatch = "The fish sense something amiss."
 
     if message and message:find(patternToMatch) then
         Dalamud.Log(string.format("[%s] OnChatMessage triggered for Fish sense..!!", ScriptName))
@@ -895,8 +896,8 @@ function CharacterState.gsFishSense()
     end
 
     WaitForPlayer()
-    State = CharacterState.gsTeleportFishingZone
-    Dalamud.Log(string.format("[%s] State Changed → TeleportFishingZone", ScriptName))
+    State = CharacterState.gsResetAmiss
+    Dalamud.Log(string.format("[%s] State Changed → gsResetAmiss", ScriptName))
 end
 
 
