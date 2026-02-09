@@ -1,7 +1,7 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.6.1
+version: 0.6.2
 description: |
   Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
   -  Moves around from time to time.
@@ -78,6 +78,7 @@ configs:
 --]=====]
 
 --[[
+    -> 0.6.2    Update AutoHook preset to use Thaliak's Favor
     -> 0.6.1    Exit script on achievement completion.
     -> 0.5.3    Fix fish sensing something amiss
     -> 0.5.2    Added Timer reporting
@@ -175,7 +176,7 @@ DarkMatterVendor = {
 --    Collectables    --
 ------------------------
 
-AutohookEverything = "AH4_H4sIAAAAAAAACuVWTXOjOBD9KymdoQqwwMDN43WyqfIkqTizc5jag4DGqCxLHkk44035v28JkG38lcxWbnuD7tbr1+qnlt7QqNZiTJRW43KO0jc04SRjMGIMpVrW4CDjnFIOe2dhXfcFSoM4cdCTpEJSvUGp76B7NfmVs7qAYm828dsW66sQeWXAmo/AfDU4Ueygu9VLJUFVghUo9T2vh3wdusFIhr0V3rtkxlW9vFAY9j18xCg4YmRBBGOQa1sJ9j3/MCx4n4WQBSWsAeBrkNbQD25pRT7236EV9PyjTKwBpSVhyua7paqabEAdMA6PMMOwjzmw3SMLmFW01F8IbSo2BmUNM03yhUJp2PUjik+Be7C4g30imgLP4YBRdLww6jMK7VJJ/4Ex0a2obNronT2KutUvFWGULNQtWQtpAHoGW8/A6dufIRdrkIaF55w9FVF8op7BqZ6vt+kLnd+RZbMnIz5nIJXlYyRlEIcePim0lyO2bauZppUQi90GB16YHB+4K0LdOmjyS0vSmxK7kk3vX8Tslazuua6ppoLfEcptMtd30LSW8BWUInNAKUIOemhKQw+CA+oQNitAqVHaGbypUPo/4z1JUHCeIXLRBX+bsfHv+cxWkGtJ2LiWErj+pCqPUD+t1rNsTyo+m72JuhUyh+Zgv5KVbXZjLIy1m7n+0OkEOtNiZYYL5fOZhlUjqX2VnYhH8nOKO4Q7remVLjNC9S1lTF3xP9dcPdYW4RunP2swzFCAYxJkGNxwgBMX4yxyE0xiN05whOMSkgCGaOugKVX6sTQsFUp/vDV8zRbshlG7P5eq/AukIpoyuDERBvBByCVhf3Zn1Q7G70AW+4NnvAp6XelM7VZhf5iY3eoWz7QUfP7x5UESHayewhx4QeTmdwH+EHXGdsz7AVGyC9izuxjSo3Am6kXS1aVMwzAY7EIu5eoFXcnWxRmdj0oN8tkoaixqru0+7FxjUs8rPaVLc0/icNC6+qfDC3D3wKplex2bj4Nbp53yYXJ8i1592pjXkB1iVkfP8LOmEoqZJro2N7R5bh2L62MaOoryBpe0ci7wf6CJXuP9c23/WM/xb/Z81o20Ro79a/2Rs803Bd8r4A+ieXeP1oQyc5Stbg9GXzkMBn5cDt0sLomLgyRz46L03dzL8iKHPEkiQNu/7ezrHvQ/doZ2/Jn/duJ2o+4O9M1kDXKjzVbccHGTd+/e/uCFjEQkIK7vxbGL/Sh0szLHLhngEMoo9oY5oO2/u7GGm7kMAAA="
+AutohookEverything = "AH4_H4sIAAAAAAAACuVWTXOjOBD9KymdoQqwwMDN43WyqfIkqTizc5jag4DGqCxLHkk44035v28JkG38lcxWbnuD7tbr1+qnlt7QqNZiTJRW43KO0jc04SRjMGIMpVrW4CDjnFIOe2dhXfcFSoM4cdCTpEJSvUGp76B7NfmVs7qAYm828dsW66sQeWXAmo/AfDU4Ueygu9VLJUFVghUo9T2vh3wdusFIhr0V3rtkxlW9vFAY9j18xCg4YmRBBGOQa1sJ9j3/MCx4n4WQBSWsAeBrkNbQD25pRT7236EV9PyjTKwBpSVhyua7paqabEAdMA6PMMOwjzmw3SMLmFW01F8IbSo2BmUNM03yhUJp2PUjik+Be7C4g30imgLP4YBRdLww6jMK7VJJ/4Ex0a2obNronT2KutUvFWGULNQtWQtpAHoGW8/A6dufIRdrkIaF55w9FVF8op74VM/X2/SFzu/IstmTEZ8zkMryMZIqUDoYevik0F6O2LatZppWQix2Gxx4YXJ84K4IdeugyS8tSW9K7Eo2vX8Rs1eyuue6ppoKfkcot8lc30HTWsJXUIrMAaUIOeihKQ09CA6oQ9isAKVGaWfwpkLp/4z3JEHBeYbIRRf8bcbGv+czW0GuJWHjWkrg+pOqPEL9tFrPsj2p+Gz2JupWyByag/1KVrbZjbEw1m7m+kOnE+hMi5UZLpTPZxpWjaT2VXYiHsnPKe4Q7rSmV7rMCNW3lDF1xf9cc/VYW4RvnP6swTBDAY5JkGFwwwFOXIyzyE0wid04wRGOS0gCGKKtg6ZU6cfSsFQo/fHW8DVbsBtG7f5cqvIvkIpoyuDGRBjAByGXhP3ZnVU7GL8DWewPnvEq6HWlM7Vbhf1hYnarWzzTUvD5x5cHSXSwegpz4AWRm98F+EPUGdsx7wdEyS5gz+5iSI/CmagXSVeXMg3DYLALuZSrF3QlWxdndD4qNchno6ixqLm2+7BzjUk9r/SULs09icNB6+qfDi/A3QOrlu11bD4Obp12yofJ8S169WljXkN2iFkdPcPPmkooZpro2tzQ5rl1LK6Paegoyhtc0sq5wP+BJnqN98+1/WM9x7/Z81k30ho59q/1R8423xR8r4A/iObdPVoTysxRtro9GH3lMBj4cTl0s7gkLg6SzI2L0ndzL8uLHPIkiQBt/7azr3vQ/9gZ2vFn/tuJ2426O9A3kzXIjTZbccPFTd69e/uDFzISkYC4vhfHLvaj0M3KHLtkgEMoo9gb5oC2/wIafxRvuQwAAA=="
 
 FishTable = {
     {
