@@ -1,7 +1,7 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.5.3
+version: 0.5.4
 description: |
   Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
   -  Moves around from time to time.
@@ -79,6 +79,7 @@ configs:
 --]=====]
 
 --[[
+    -> 0.5.4    Exit script on achievement completion.
     -> 0.5.3    Fix fish sensing something amiss
     -> 0.5.2    Added Timer reporting
     -> 0.5.1    Basic functionality is working
@@ -688,12 +689,16 @@ end
 --[[ OnChatMessage ]]
 function OnChatMessage()
     local message = TriggerData.message
-    local patternToMatch = "The fish sense something amiss."
+    local patternAmiss = "The fish sense something amiss."
+    local patternAchievement = SelectedFish.AchievementName
 
-    if message and message:find(patternToMatch) then
+    if message and message:find(patternAmiss) then
         Dalamud.Log(string.format("[%s] OnChatMessage triggered for Fish sense..!!", ScriptName))
         State = CharacterState.gsFishSense
         Dalamud.Log(string.format("[%s] State Changed → FishSense", ScriptName))
+    elseif message and message:find(patternAchievement)
+        Dalamud.Log(string.format("[%s] Achievement '%s' found, ending state machine", ScriptName, SelectedFish.AchievementName))
+        ContinueLoop = false
     end
 end
 
