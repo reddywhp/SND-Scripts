@@ -1,11 +1,11 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.6.0
+version: 0.6.1
 description: |
   Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
   -  Moves around from time to time.
-  -  Lets you your gear before it breaks.
+  -  Lets you repair your gear before it breaks.
 plugin_dependencies:
   - Lifestream
   - vnavmesh
@@ -78,7 +78,7 @@ configs:
 --]=====]
 
 --[[
-    -> 0.6.0    Exit script on achievement completion.
+    -> 0.6.1    Exit script on achievement completion.
     -> 0.5.3    Fix fish sensing something amiss
     -> 0.5.2    Added Timer reporting
     -> 0.5.1    Basic functionality is working
@@ -695,7 +695,7 @@ function OnChatMessage()
         Dalamud.Log(string.format("[%s] OnChatMessage triggered for Fish sense..!!", ScriptName))
         State = CharacterState.gsFishSense
         Dalamud.Log(string.format("[%s] State Changed → FishSense", ScriptName))
-    elseif message and message:find(patternAchievement)
+    elseif message and message:find(patternAchievement) then
         Dalamud.Log(string.format("[%s] OnChatMessage triggered for Achievement '%s'", ScriptName, SelectedFish.AchievementName))
         State = CharacterState.gsExit
         Dalamud.Log(string.format("[%s] State Changed -> gsExit", ScriptName))
