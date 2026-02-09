@@ -6,7 +6,6 @@ description: |
   Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
   -  Moves around from time to time.
   -  Lets you your gear before it breaks.
-  -  Skips achievements you already have.
 plugin_dependencies:
   - Lifestream
   - vnavmesh
