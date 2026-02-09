@@ -1,7 +1,7 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.6.3
+version: 0.6.4
 description: |
     Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
     -  Moves around from time to time.
@@ -78,7 +78,7 @@ configs:
 --]=====]
 
 --[[
-    -> 0.6.3    Corrected gsExit
+    -> 0.6.4    Corrected gsExit
     -> 0.6.2    Update AutoHook preset to use Thaliak's Favor
     -> 0.6.1    Exit script on achievement completion.
     -> 0.5.3    Fix fish sensing something amiss
@@ -1372,8 +1372,14 @@ end
 --[[ CharacterState.gsExit ]]
 function CharacterState.gsExit()
     if Svc.Condition[CharacterCondition.gathering] or Svc.Condition[CharacterCondition.fishing] then
+        Dalamud.Log(string.format("[%s] gsExit - Quit fishing", ScriptName))
         QuitFishing()
+        yield("/wait 5")
+    elseif (IPC.vnavmesh.PathfindInProgress() or IPC.vnavmesh.IsRunning()) then
+        Dalamud.Log(string.format("[%s] gsExit - Stop moving", ScriptName))
+        IPC.vnavmesh.Stop()        
     else
+        Dalamud.Log(string.format("[%s] gsExit - end the loop", ScriptName))
         continueLoop = false
     end
 end
