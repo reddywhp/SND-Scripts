@@ -1,15 +1,15 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.6.2a
+version: 0.6.3
 description: |
-  Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
-  -  Moves around from time to time.
-  -  Lets you repair your gear before it breaks.
+    Slogging through Fishing achievements.  Just tries to catch everything.  Does not help towards anything other than the straight-up fishing numbers.
+    -  Moves around from time to time.
+    -  Lets you repair your gear before it breaks.
 plugin_dependencies:
-  - Lifestream
-  - vnavmesh
-  - AutoHook
+    - Lifestream
+    - vnavmesh
+    - AutoHook
 configs:
     TargetAchievement:
         description: "What is your target achievement?"
@@ -78,7 +78,7 @@ configs:
 --]=====]
 
 --[[
-    ->      a   Corrected gsExit
+    -> 0.6.3    Corrected gsExit
     -> 0.6.2    Update AutoHook preset to use Thaliak's Favor
     -> 0.6.1    Exit script on achievement completion.
     -> 0.5.3    Fix fish sensing something amiss
@@ -1373,8 +1373,9 @@ end
 function CharacterState.gsExit()
     if Svc.Condition[CharacterCondition.gathering] or Svc.Condition[CharacterCondition.fishing] then
         QuitFishing()
+    else
+        continueLoop = false
     end
-    continueLoop = false
 end
 
 --[[ CharacterState.gsReady ]]
