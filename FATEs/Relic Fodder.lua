@@ -77,6 +77,11 @@ RelicFodderOptions = {
       {itemName = "Atma of the Crab", itemId = 7862, zoneName = "Western La Noscea", zoneId = 138, },
     },
   },
+  { RelicTarget = "2.28 - Alexandrite - Star Light, Star Bright",
+    RelicFodder = {
+      {itemName = "Alexandrite", itemId = 7883, zoneName = "Middle La Noscea", zoneId = 134, },
+    },
+  },
   { RelicTarget = "5.35 - Memories - For Want of a Memory",
     RelicFodder = {
       {itemName = "Tortured Memory of the Dying", itemId = 31573,  zoneName = "Coerthas Western Highlands", zoneId = 397 },
