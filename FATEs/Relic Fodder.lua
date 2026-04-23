@@ -1,7 +1,7 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.9.1b
+version: 0.9.2
 description: Generic Relic Fodder Farming - Companion script for Fate Farming
 plugin_dependencies:
 - Lifestream
@@ -33,7 +33,8 @@ the list of relicFodder farming zones and farm fates until you have the selected
 of the required relicFodders in your inventory, then teleport to the next zone and 
 restart the fate farming script.
 
-    -> 0.9.1b    Tweaking options
+    -> 0.9.2    Added Alexandrite farming
+    -> 0.9.1b   Tweaking options
     -> 0.9.0    Copied from Zodiac Atma farming for starting
 
 --#region Settings
