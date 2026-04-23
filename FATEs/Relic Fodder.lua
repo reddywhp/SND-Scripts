@@ -1,7 +1,7 @@
 --[=====[
 [[SND Metadata]]
 author: reddywhp
-version: 0.9.2
+version: 0.9.2a
 description: Generic Relic Fodder Farming - Companion script for Fate Farming
 plugin_dependencies:
 - Lifestream
@@ -17,6 +17,7 @@ configs:
     is_choice: true
     choices: [
         "2.2 - Atma - Up in Arms",
+        "2.28 - Alexandrite - Star Light, Star Bright",
         "5.35 - Memories - For Want of a Memory",
         "5.45 - Memories - The Resistance Remembers",
         "7.25 - Demiatma - Arcane Artistry",
@@ -33,7 +34,7 @@ the list of relicFodder farming zones and farm fates until you have the selected
 of the required relicFodders in your inventory, then teleport to the next zone and 
 restart the fate farming script.
 
-    -> 0.9.2    Added Alexandrite farming
+    -> 0.9.2a    Added Alexandrite farming
     -> 0.9.1b   Tweaking options
     -> 0.9.0    Copied from Zodiac Atma farming for starting
 
